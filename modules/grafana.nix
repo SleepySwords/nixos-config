@@ -4,8 +4,8 @@
     settings = {
       server = {
         http_addr = "127.0.0.1";
-	http_port = 3000;
-	domain = "sleepyswords.dev";
+        http_port = 3000;
+        domain = "sleepyswords.dev";
       };
     };
   };
@@ -14,19 +14,19 @@
     port = 9001;
     enable = true;
     exporters = {
-	node = {
-	  port = 9002;
-	  enabledCollectors = [ "systemd" ];
-	  enable = true;
-	};
+        node = {
+          port = 9002;
+          enabledCollectors = [ "systemd" ];
+          enable = true;
+        };
     };
 
     scrapeConfigs = [
       {
         job_name = "chrysalis";
-	static_configs = [{
-	  targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ];
-	}];
+        static_configs = [{
+          targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ];
+        }];
       }
     ];
   };
@@ -53,12 +53,9 @@
     addSSL = true;
     enableACME = true;
     locations."/" = {
-	proxyPass = "http://${toString config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
-	# ssl = true;
-	# ssl_certificate = "/etc/grafana/grafana.crt";
-	# ssl_certificate_key = "/etc/grafana/grafana.key";
-	proxyWebsockets = true;
-	recommendedProxySettings = true;
+        proxyPass = "http://${toString config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
+        proxyWebsockets = true;
+        recommendedProxySettings = true;
     };
   };
 }
