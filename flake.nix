@@ -25,15 +25,16 @@
         modules = [
           # Import the previous configuration.nix we used,
           # so the old configuration file still takes effect
-          ./hosts/homelab-unit00/default.nix
+          ./hosts/homelab-unit00/
 	  ./modules/grafana.nix
 	  ./modules/k3.nix
+          ./deploy/
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            home-manager.users.swords = import ./home.nix;
+            home-manager.users.swords = import ./home;
 
             # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
           }
