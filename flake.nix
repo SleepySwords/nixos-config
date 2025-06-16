@@ -26,8 +26,9 @@
           # Import the previous configuration.nix we used,
           # so the old configuration file still takes effect
           ./hosts/homelab-unit00
-	  ./modules/grafana.nix
-	  ./modules/k3.nix
+          ./modules/grafana.nix
+          ./modules/k3.nix
+          ./modules/deploy.nix
           ./deploy
           home-manager.nixosModules.home-manager
           {
