@@ -19,7 +19,7 @@
     (pkgs.writeShellScriptBin "deploy-from-git" ''
 #!/bin/bash
 
-URL="${NIXOS_CONFIG:-https://github.com/SleepySwords/nixos-config}"
+URL="''${NIXOS_CONFIG:-https://github.com/SleepySwords/nixos-config}"
 
 if cd ~/nixos-config;
     then git pull;
