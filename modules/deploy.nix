@@ -10,7 +10,7 @@ if cd ~/nixos-config;
     else git clone $URL ~/nixos-config;
 fi;
 
-nixos-rebuild switch --flake ~/nixos-config
+sudo nixos-rebuild switch --flake ~/nixos-config
     '');
 in {
   users.users.deploy = {
@@ -24,7 +24,7 @@ in {
   security.sudo.extraRules = [
     {
       users = ["deploy"];
-      commands = [ { command = "ALL"; options = [ "SETENV" "NOPASSWD" ]; } ];
+      commands = [ { command = "nixos-rebuild"; options = [ "SETENV" "NOPASSWD" ]; } ];
     }
   ];
 
