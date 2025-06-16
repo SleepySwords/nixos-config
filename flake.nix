@@ -29,7 +29,6 @@
           ./modules/grafana.nix
           ./modules/k3.nix
           ./modules/deploy.nix
-          ./deploy
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
