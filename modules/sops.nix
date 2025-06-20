@@ -1,8 +1,10 @@
-{ sops, ... }:
+{ inputs, ... }:
 {
+  imports = [
+    inputs.sops-nix.nixosModules.sops
+  ];
   sops.age.keyFile = "/var/lib/sops-nix/key.txt";
-
-    sops.secrets."test" = {
-    sopsFile = ./secrets/homelab.yaml;
+  sops.secrets."test" = {
+    sopsFile = ../secrets/homelab.yaml;
   };
 }
