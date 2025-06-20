@@ -8,4 +8,9 @@
   sops.secrets.hello = {
     format = "yaml";
   };
+
+  sops.secrets.cloudflare = {
+    sopsFile = ../secrets/cloudflare.yaml;
+    path = "/run/secrets/cloudflare";
+  };
 }
