@@ -6,7 +6,8 @@ let
 URL="''${NIXOS_CONFIG:-https://github.com/SleepySwords/nixos-config}"
 
 if cd ~/nixos-config;
-    then git pull;
+    then git fetch;
+         git reset --hard origin/master;
     else git clone $URL ~/nixos-config;
 fi;
 
