@@ -9,8 +9,10 @@
     format = "yaml";
   };
 
-  sops.secrets.cloudflare = {
-    sopsFile = ../secrets/cloudflare.yaml;
-    path = "/run/secrets/cloudflare";
+  sops.secrets."cloudflare.env" = {
+    sopsFile = ../secrets/cloudflare.env;
+    path = "/run/secrets/cloudflare.env";
+    format = "dotenv";
+    key = "";
   };
 }
