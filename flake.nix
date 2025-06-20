@@ -35,6 +35,7 @@
           ./modules/k3.nix
           ./modules/deploy.nix
           ./modules/sops.nix
+          ./modules/docker.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
