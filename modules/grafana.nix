@@ -53,9 +53,25 @@
     addSSL = true;
     enableACME = true;
     locations."/" = {
+<<<<<<< Updated upstream
         proxyPass = "http://${toString config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
         proxyWebsockets = true;
         recommendedProxySettings = true;
+||||||| Stash base
+	proxyPass = "http://${toString config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
+	# ssl = true;
+	# ssl_certificate = "/etc/grafana/grafana.crt";
+	# ssl_certificate_key = "/etc/grafana/grafana.key";
+	proxyWebsockets = true;
+	recommendedProxySettings = true;
+=======
+        proxyPass = "http://${toString config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
+        # ssl = true;
+        # ssl_certificate = "/etc/grafana/grafana.crt";
+        # ssl_certificate_key = "/etc/grafana/grafana.key";
+        proxyWebsockets = true;
+        recommendedProxySettings = true;
+>>>>>>> Stashed changes
     };
   };
 }
