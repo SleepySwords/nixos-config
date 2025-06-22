@@ -17,6 +17,50 @@
   virtualisation.arion = {
     backend = "podman-socket";
     projects = {
+      "pterodactyl".settings.services = {
+        "database".service = {
+          image = "mariadb:10.5";
+          restart = "always";
+          command = "--default-authentication-plugin=mysql_native_password";
+          volumes = ["/srv/pterodactyl/database:/var/lib/mysql"];
+          environment = {
+            MYSQL_DATABASE= "panel";
+            MYSQL_USER= "pterodactyl";
+            MYSQL_PASSWORD= "CHANGE_ME";
+            MYSQL_ROOT_PASSWORD= "CHANGE_ME_TOO";
+          };
+        };
+        "cache".service = {
+          image = "redis:alpine";
+          restart = "always";
+        };
+        "panel".service = {
+          image = "ghcr.io/pterodactyl/panel:latest";
+          restart = "always";
+          ports = [ "1338:80" "1339:443" ];
+          links = [ "cache" "database" ];
+          volumes = [
+            "/srv/pterodactyl/var/:/app/var/"
+            "/srv/pterodactyl/nginx/:/etc/nginx/http.d/"
+            "/srv/pterodactyl/certs/:/etc/letsencrypt/"
+            "/srv/pterodactyl/logs/:/app/storage/logs"
+          ];
+          environment = {
+            APP_URL= "http://192.168.1.119:1338";
+            APP_TIMEZONE= "Australia/Melbourne";
+            APP_SERVICE_AUTHOR= "noreply@example.com";
+            DB_PASSWORD = "*db-password";
+            APP_ENV = "production";
+            APP_ENVIRONMENT_ONLY = "false";
+            CACHE_DRIVER = "redis";
+            SESSION_DRIVER = "redis";
+            QUEUE_DRIVER = "redis";
+            REDIS_HOST = "cache";
+            DB_HOST = "database";
+            DB_PORT = "3306";
+          };
+        };
+      };
       "wikijs".settings.services = {
         "db".service = {
           image = "postgres:15-alpine";
