@@ -46,7 +46,7 @@
             "/srv/pterodactyl/logs/:/app/storage/logs"
           ];
           environment = {
-            APP_URL= "http://192.168.1.119:1338";
+            APP_URL= "http://192.168.1.119";
             APP_TIMEZONE= "Australia/Melbourne";
             APP_SERVICE_AUTHOR= "noreply@example.com";
             DB_PASSWORD = "*db-password";
@@ -90,7 +90,7 @@
   };
 
   networking.firewall.allowedTCPPorts = [
-    1337
+    1337 1338 1339
   ];
 
   users.users.swords.extraGroups = [ "podman" ];

@@ -10,7 +10,7 @@
       email = "swords@sleepyswords.dev";
       dnsProvider = "cloudflare";
       dnsResolver = "1.1.1.1:53";
-      environmentFile = "/var/lib/secrets/cloudflare";
+      environmentFile = "/run/secrets/cloudflare.env";
       webroot = null;
     };
   };
@@ -20,4 +20,5 @@
   services.nginx.virtualHosts."homelab.sleepyswords.dev" = {
     addSSL = true;
     enableACME = true;
-  }
+  };
+}
