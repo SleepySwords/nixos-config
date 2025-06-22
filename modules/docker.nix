@@ -1,5 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
+
+  imports = [
+    inputs.arion.nixosModules.arion
+  ];
 
   environment.systemPackages = [
     pkgs.docker-client
@@ -35,8 +39,8 @@
             DB_PASS= "wikijsrocks";
             DB_NAME= "wiki";
           };
-          ports = ["1337:3000"]
-        }
+          ports = ["1337:3000"];
+        };
       };
     };
   };
