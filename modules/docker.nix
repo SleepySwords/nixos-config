@@ -23,6 +23,7 @@
           restart = "always";
           command = "--default-authentication-plugin=mysql_native_password";
           volumes = ["/srv/pterodactyl/database:/var/lib/mysql"];
+          ports = ["3306:3306"];
           environment = {
             MYSQL_DATABASE= "panel";
             MYSQL_USER= "pterodactyl";
@@ -38,7 +39,7 @@
           image = "ghcr.io/pterodactyl/panel:latest";
           restart = "always";
           ports = [ "1338:80" "1339:443" ];
-          links = [ "cache" "database" ];
+          # links = [ "cache" "database" ];
           volumes = [
             "/srv/pterodactyl/var/:/app/var/"
             "/srv/pterodactyl/nginx/:/etc/nginx/http.d/"
@@ -49,7 +50,7 @@
             APP_URL= "http://192.168.1.119";
             APP_TIMEZONE= "Australia/Melbourne";
             APP_SERVICE_AUTHOR= "noreply@example.com";
-            DB_PASSWORD = "*db-password";
+            DB_PASSWORD = "CHANGE_ME";
             APP_ENV = "production";
             APP_ENVIRONMENT_ONLY = "false";
             CACHE_DRIVER = "redis";
@@ -90,7 +91,7 @@
   };
 
   networking.firewall.allowedTCPPorts = [
-    1337 1338 1339
+    1337 1338 1339 3306
   ];
 
   users.users.swords.extraGroups = [ "podman" ];
