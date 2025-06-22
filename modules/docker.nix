@@ -45,5 +45,9 @@
     };
   };
 
+  networking.firewall.allowedTCPPorts = [
+    1337
+  ];
+
   users.users.swords.extraGroups = [ "podman" ];
 }
