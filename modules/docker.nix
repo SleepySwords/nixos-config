@@ -6,6 +6,7 @@
   ];
 
   environment.systemPackages = [
+    pkgs.arion
     pkgs.docker-client
   ];
 
