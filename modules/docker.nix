@@ -152,7 +152,7 @@
   };
 
   networking.firewall.allowedTCPPorts = [
-    1339 3306
+    1339 3306 8080 2022
   ];
 
   users.users.swords.extraGroups = [ "podman" ];
