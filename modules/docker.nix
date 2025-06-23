@@ -47,7 +47,7 @@
             "/srv/pterodactyl/logs/:/app/storage/logs"
           ];
           environment = {
-            APP_URL= "http://192.168.1.119";
+            APP_URL= "https://homelab.sleepyswords.dev/";
             APP_TIMEZONE= "Australia/Melbourne";
             APP_SERVICE_AUTHOR= "noreply@example.com";
             DB_PASSWORD = "CHANGE_ME";
@@ -90,8 +90,21 @@
     };
   };
 
+  services.nginx.virtualHosts."homelab.sleepyswords.dev" = {
+    locations."/wikijs" = {
+        proxyPass = "http://localhost:1337";
+        proxyWebsockets = true;
+        recommendedProxySettings = true;
+    };
+    locations."/" = {
+        proxyPass = "http://localhost:1338";
+        proxyWebsockets = true;
+        recommendedProxySettings = true;
+    };
+  };
+
   networking.firewall.allowedTCPPorts = [
-    1337 1338 1339 3306
+    1339 3306
   ];
 
   users.users.swords.extraGroups = [ "podman" ];
