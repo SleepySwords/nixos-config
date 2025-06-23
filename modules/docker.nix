@@ -61,6 +61,27 @@
             DB_PORT = "3306";
           };
         };
+        "wings".service = {
+          image = "ghcr.io/pterodactyl/wings:latest";
+          restart = "always";
+          ports = ["8080:8080" "2022:2022"];
+          volumes = [
+            "/var/run/docker.sock:/var/run/docker.sock"
+            "/var/lib/docker/containers/:/var/lib/docker/containers/"
+            "/etc/pterodactyl/:/etc/pterodactyl/"
+            "/var/lib/pterodactyl/:/var/lib/pterodactyl/"
+            "/var/log/pterodactyl/:/var/log/pterodactyl/"
+            "/tmp/pterodactyl/:/tmp/pterodactyl/"
+            "/etc/ssl/certs:/etc/ssl/certs:ro"
+          ];
+          tty = true;
+          environment = {
+            TZ = "Australia/Melbourne";
+            WINGS_UID = 988;
+            WINGS_GID = 988;
+            WINGS_USERNAME = "pterodactyl";
+          };
+        };
       };
       "wikijs".settings.services = {
         "db".service = {
@@ -89,6 +110,27 @@
       };
     };
   };
+
+  environment.etc."pterodactyl/config.yml".text = ''
+    debug: false
+    uuid: a2bc0834-5516-4134-b61e-7a2ab9b55195
+    token_id: BAJsTBvxyhBV8Jts
+    token: w35ghwknymNB2dbcEtUHrKxpZxTCCN4tdGTXE8nqBN3VrpEXwvJNd5wmiKuplPmz
+    api:
+      host: 0.0.0.0
+      port: 8080
+      ssl:
+        enabled: false
+        cert: /etc/letsencrypt/live/192.168.1.119/fullchain.pem
+        key: /etc/letsencrypt/live/192.168.1.119/privkey.pem
+      upload_limit: 100
+    system:
+      data: /var/lib/pterodactyl/volumes
+      sftp:
+        bind_port: 2022
+    allowed_mounts: []
+    remote: 'https://homelab.sleepyswords.dev'
+  '';
 
   services.nginx.virtualHosts."homelab.sleepyswords.dev" = {
     locations."/wikijs" = {
