@@ -112,26 +112,31 @@
     };
   };
 
-  environment.etc."pterodactyl/config.yml".text = ''
-    debug: false
-    uuid: a2bc0834-5516-4134-b61e-7a2ab9b55195
-    token_id: BAJsTBvxyhBV8Jts
-    token: w35ghwknymNB2dbcEtUHrKxpZxTCCN4tdGTXE8nqBN3VrpEXwvJNd5wmiKuplPmz
-    api:
-      host: 0.0.0.0
-      port: 8080
-      ssl:
-        enabled: false
-        cert: /etc/letsencrypt/live/192.168.1.119/fullchain.pem
-        key: /etc/letsencrypt/live/192.168.1.119/privkey.pem
-      upload_limit: 100
-    system:
-      data: /var/lib/pterodactyl/volumes
-      sftp:
-        bind_port: 2022
-    allowed_mounts: []
-    remote: 'https://homelab.sleepyswords.dev'
-  '';
+  environment.etc."pterodactyl/config.yml" = {
+    text = ''
+      debug: false
+      uuid: a2bc0834-5516-4134-b61e-7a2ab9b55195
+      token_id: BAJsTBvxyhBV8Jts
+      token: w35ghwknymNB2dbcEtUHrKxpZxTCCN4tdGTXE8nqBN3VrpEXwvJNd5wmiKuplPmz
+      api:
+        host: 0.0.0.0
+        port: 8080
+        ssl:
+          enabled: false
+          cert: /etc/letsencrypt/live/192.168.1.119/fullchain.pem
+          key: /etc/letsencrypt/live/192.168.1.119/privkey.pem
+        upload_limit: 100
+      system:
+        data: /var/lib/pterodactyl/volumes
+        sftp:
+          bind_port: 2022
+      allowed_mounts: []
+      remote: 'https://homelab.sleepyswords.dev'
+    '';
+
+    group = "arion";
+    user = "swords";
+  };
 
   services.nginx.virtualHosts."homelab.sleepyswords.dev" = {
     locations."/wikijs" = {
