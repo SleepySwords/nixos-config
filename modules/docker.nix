@@ -6,17 +6,17 @@
   ];
 
   environment.systemPackages = [
-    pkgs.arion
+    # pkgs.arion
     pkgs.docker-client
   ];
 
-  virtualisation.docker.enable = false;
-  virtualisation.podman.enable = true;
-  virtualisation.podman.dockerSocket.enable = true;
-  virtualisation.podman.defaultNetwork.settings.dns_enabled = true;
+  virtualisation.docker.enable = true;
+  # virtualisation.podman.enable = true;
+  # virtualisation.podman.dockerSocket.enable = true;
+  # virtualisation.podman.defaultNetwork.settings.dns_enabled = true;
 
   virtualisation.arion = {
-    backend = "podman-socket";
+    backend = "docker";
     projects = {
       "pterodactyl".settings.services = {
         "database".service = {
