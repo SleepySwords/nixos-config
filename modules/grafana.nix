@@ -47,6 +47,10 @@
     };
   };
 
+  networking.hosts = {
+    "192.168.1.101" = ["dash.sleepyswords.dev"];
+  };
+
   services.nginx.enable = true;
 
   services.nginx.virtualHosts."dash.sleepyswords.dev" = {
