@@ -5,19 +5,27 @@
   ];
 
   security.acme = {
+    defaults = {
+      email = "swords@sleepyswords.dev";
+    };
     acceptTerms = true;
-    certs."homelab.sleepyswords.dev" = {
+    certs."hlb.sleepyswords.dev" = {
       email = "swords@sleepyswords.dev";
       dnsProvider = "cloudflare";
       dnsResolver = "1.1.1.1:53";
       environmentFile = "/run/secrets/cloudflare.env";
       webroot = null;
+      extraDomainNames = [ "*.hlb.sleepyswords.dev" ];
     };
   };
 
   services.nginx.enable = true;
 
-  services.nginx.virtualHosts."homelab.sleepyswords.dev" = {
+  networking.hosts = {
+    "192.168.1.101" = ["hlb.sleepyswords.dev"];
+  };
+
+  services.nginx.virtualHosts."hlb.sleepyswords.dev" = {
     addSSL = true;
     enableACME = true;
   };

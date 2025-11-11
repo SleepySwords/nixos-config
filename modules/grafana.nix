@@ -5,7 +5,9 @@
       server = {
         http_addr = "127.0.0.1";
         http_port = 3000;
-        domain = "sleepyswords.dev";
+        domain = "hlb.sleepyswords.dev";
+        root_url = "https://hlb.sleepyswords.dev/dash/";
+        serve_from_sub_path = true;
       };
     };
   };
@@ -36,27 +38,10 @@
     443
   ];
 
-  security.acme = {
-    acceptTerms = true;
-    certs."dash.sleepyswords.dev" = {
-      email = "swords@sleepyswords.dev";
-      dnsProvider = "cloudflare";
-      dnsResolver = "1.1.1.1:53";
-      environmentFile = "/var/lib/secrets/cloudflare";
-      webroot = null;
-    };
-  };
-
-  networking.hosts = {
-    "192.168.1.101" = ["dash.sleepyswords.dev"];
-  };
-
   services.nginx.enable = true;
 
-  services.nginx.virtualHosts."dash.sleepyswords.dev" = {
-    addSSL = true;
-    enableACME = true;
-    locations."/" = {
+  services.nginx.virtualHosts."hlb.sleepyswords.dev" = {
+    locations."/dash" = {
         proxyPass = "http://${toString config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
         proxyWebsockets = true;
         recommendedProxySettings = true;

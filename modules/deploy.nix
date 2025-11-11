@@ -11,7 +11,7 @@ if cd ~/nixos-config;
     else git clone $URL ~/nixos-config;
 fi;
 
-sudo ${"${toString pkgs.nixos-rebuild}/bin/nixos-rebuild"} switch --flake ~/nixos-config
+sudo ${"${toString pkgs.nixos-rebuild}/bin/nixos-rebuild"} switch --flake ~/nixos-config --show-trace
     '');
 in {
   users.users.deploy = {

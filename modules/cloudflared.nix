@@ -6,8 +6,8 @@
       "8e58a865-17ad-487e-b75e-bb1fce7e87eb" = {
         credentialsFile = "${config.sops.secrets.cloudflared.path}";
         ingress = {
-          "*.home.sleepyswords.dev" = {
-            service = "https://localhost";
+          "hlb.sleepyswords.dev" = {
+            service = "https://hlb.sleepyswords.dev";
           };
         };
       };
