@@ -15,4 +15,11 @@
     format = "dotenv";
     key = "";
   };
+
+  sops.secrets."cloudflared.json" = {
+    sopsFile = ../secrets/cloudflared.json;
+    path = "/run/secrets/cloudflared.json";
+    format = "json";
+    key = "";
+  };
 }
