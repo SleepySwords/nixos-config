@@ -4,6 +4,7 @@
   inputs = {
     # NixOS official package source, using the nixos-25.05 branch here
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,7 +19,7 @@
     };
     darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
   };
 
@@ -36,13 +37,13 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/homelab-unit00
-          ./modules/grafana.nix
-          ./modules/k3.nix
-          ./modules/deploy.nix
-          ./modules/sops.nix
-          ./modules/docker.nix
-          ./modules/nginx.nix
-          ./modules/cloudflared.nix
+          ./modules/nixos/grafana.nix
+          ./modules/nixos/k3.nix
+          ./modules/nixos/deploy.nix
+          ./modules/nixos/sops.nix
+          ./modules/nixos/docker.nix
+          ./modules/nixos/nginx.nix
+          ./modules/nixos/cloudflared.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -56,7 +57,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/homelab-unit01.nix
-          ./modules/prometheus-darwin.nix
+          ./modules/darwin/prometheus.nix
         ];
       };
     };
