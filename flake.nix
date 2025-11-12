@@ -56,7 +56,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/homelab-unit01.nix
-          ./modules/prometheus.nix
+          ./modules/prometheus-darwin.nix
         ];
       };
     };
