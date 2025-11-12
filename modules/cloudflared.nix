@@ -3,7 +3,7 @@
   services.cloudflared = {
     enable = true;
     tunnels = {
-      "480f5412-3fe8-486a-b779-f46869d13081" = {
+      "c0978d36-a466-4eea-a8bd-09e5615a19a2" = {
         credentialsFile = "${config.sops.secrets."cloudflared.json".path}";
         ingress = {
           "hlb.sleepyswords.dev" = "https://hlb.sleepyswords.dev";
