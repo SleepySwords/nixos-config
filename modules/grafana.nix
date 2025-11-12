@@ -33,13 +33,6 @@
     ];
   };
 
-  networking.firewall.allowedTCPPorts = [
-    80
-    443
-  ];
-
-  services.nginx.enable = true;
-
   services.nginx.virtualHosts."hlb.sleepyswords.dev" = {
     locations."/dash" = {
         proxyPass = "http://${toString config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
