@@ -12,27 +12,6 @@
     };
   };
 
-  services.prometheus = {
-    port = 9001;
-    enable = true;
-    exporters = {
-        node = {
-          port = 9002;
-          enabledCollectors = [ "systemd" ];
-          enable = true;
-        };
-    };
-
-    scrapeConfigs = [
-      {
-        job_name = "chrysalis";
-        static_configs = [{
-          targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ];
-        }];
-      }
-    ];
-  };
-
   services.nginx.virtualHosts."hlb.sleepyswords.dev" = {
     locations."/dash" = {
         proxyPass = "http://${toString config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";

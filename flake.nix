@@ -16,23 +16,25 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    darwin = {
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     {
       self,
       nixpkgs,
+      darwin,
       home-manager,
       ...
     }@inputs:
     {
-      # Please replace my-nixos with your hostname
       nixosConfigurations.homelab-unit00 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
-          # Import the previous configuration.nix we used,
-          # so the old configuration file still takes effect
           ./hosts/homelab-unit00
           ./modules/grafana.nix
           ./modules/k3.nix
@@ -47,9 +49,14 @@
             home-manager.useUserPackages = true;
 
             home-manager.users.swords = import ./home;
-
-            # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
           }
+        ];
+      };
+      darwinConfigurations.homelab-unit01 = darwin.lib.darwinSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/homelab-unit01.nix
+          ./modules/prometheus.nix
         ];
       };
     };
