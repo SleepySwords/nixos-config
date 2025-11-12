@@ -40,6 +40,7 @@
           ./modules/sops.nix
           ./modules/docker.nix
           ./modules/nginx.nix
+          ./modules/cloudflared.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
