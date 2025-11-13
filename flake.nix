@@ -44,6 +44,7 @@
           ./modules/nixos/docker.nix
           ./modules/nixos/nginx.nix
           ./modules/nixos/cloudflared.nix
+          ./modules/nixos/prometheus.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
