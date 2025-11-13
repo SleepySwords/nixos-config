@@ -28,13 +28,13 @@
   services.nginx.virtualHosts."hlb.sleepyswords.dev" = {
     addSSL = true;
     enableACME = true;
-    locations."/eventhub/api" = {
-        proxyPass = "http://192.168.1.118:8080";
+    locations."/eventhub/api/" = {
+        proxyPass = "http://192.168.1.118:8080/api/";
         proxyWebsockets = true;
         recommendedProxySettings = true;
     };
-    locations."/eventhub/images" = {
-        proxyPass = "http://192.168.1.118:9000";
+    locations."/eventhub/images/" = {
+        proxyPass = "http://192.168.1.118:9000/images/";
         proxyWebsockets = true;
         recommendedProxySettings = true;
     };
